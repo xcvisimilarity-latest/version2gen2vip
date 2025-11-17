@@ -682,16 +682,7 @@ if (method === "POST" && path.includes("pair")) {
     // --- cek ban aktif ---
     const now = Date.now();
     const banUntil = banList.get(ip) || banList.get(ua) || 0;
-    if (banUntil && now < banUntil) {
-      await notifyOwnerTelegram(
-        `🚫 *Banned Request Blocked*\nIP: ${ip}\nUA: ${ua}\nReason: active ban\nExpires: ${new Date(banUntil).toLocaleString()}`
-      );
-      return res.status(403).json({
-        ok: false,
-        error: "Your client is temporarily banned",
-        creator: config.creator,
-      });
-    }
+    
 
     // --- ambil body ---
     const body = await parseBody(req);
